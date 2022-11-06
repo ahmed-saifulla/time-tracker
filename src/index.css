@@ -63,3 +63,23 @@ body {
 .tasks{
   color: #fff;
 }
+
+.modal{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.525);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content{
+  background-color: #17D4FE;
+  width: 500px;
+  height: 500px;
+}

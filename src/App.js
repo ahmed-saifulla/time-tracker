@@ -7,6 +7,7 @@ function App() {
   const [isStart, setIsStart] = useState(false)
   const [isPause, setIsPause] = useState(false)
   const [liveStopWatch, setLiveStopWatch] = useState({hh: 0 , mm: 0, ss: 0})
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const updateTime = () => {
     let liveDate = new Date()
@@ -62,43 +63,72 @@ function App() {
 
   
   return (
-    <div className="App">
-      <div className="timer">
-        <div className="clock">
-          {liveTime} 
+    <>
+      <div className="App">
+        <div className="timer">
+          <div className="clock">
+            {liveTime} 
+          </div>
+
+          <div className="clock stopwatch">
+            {liveStopWatch.hh + " : " + liveStopWatch.mm + " : " + liveStopWatch.ss} 
+          </div>
+
+          <div className="buttons">
+            <button className="btn" onClick={() => {
+              setIsStart(true)
+              setIsPause(false)
+              updateStopWachTime()
+            }}>
+              Start
+            </button>
+            <button className="btn" onClick={() => {
+              setIsStart(false)
+              setIsPause(true)
+            }}>Pause</button>
+            <button className="btn" onClick={() => {
+              setIsModalOpen(true)
+            }}>Save</button>
+            <button className="btn" onClick={() => {
+              setIsStart(false)
+              setIsPause(false)
+              setLiveStopWatch({hh: 0 , mm: 0, ss: 0})
+            }}>
+              Reset
+            </button>
+          </div>
         </div>
 
-        <div className="clock stopwatch">
-          {liveStopWatch.hh + " : " + liveStopWatch.mm + " : " + liveStopWatch.ss} 
-        </div>
+        
 
-        <div className="buttons">
-          <button className="btn" onClick={() => {
-            setIsStart(true)
-            setIsPause(false)
-            updateStopWachTime()
-          }}>
-            Start
-          </button>
-          <button className="btn" onClick={() => {
-            setIsStart(false)
-            setIsPause(true)
-          }}>Pause</button>
-          <button className="btn">Save</button>
-          <button className="btn" onClick={() => {
-            setIsStart(false)
-            setIsPause(false)
-            setLiveStopWatch({hh: 0 , mm: 0, ss: 0})
-          }}>
-            Reset
-          </button>
+        <div className="tasks">
+          Tasks Here 
         </div>
       </div>
 
-      <div className="tasks">
-        Tasks Here 
+      {isModalOpen ? 
+        <div className="modal">
+        <div className="modal-content">
+          <form action="">
+           
+            <label htmlFor=""></label>
+            <input type="text" />
+            
+            <label htmlFor=""></label>
+            <input type="text" />
+
+            <div className="modal-footer">
+              <button>Save</button>
+              <button onClick={() => {
+                setIsModalOpen(false)
+              }}>cancel</button>
+            </div>
+          
+          </form>
+        </div>
       </div>
-    </div>
+      : null}
+    </>
   );
 }
 
