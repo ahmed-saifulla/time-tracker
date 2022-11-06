@@ -122,6 +122,8 @@ function App() {
              <div key={i}  className="task"> 
               <h6>{task.title}</h6>
               <p>{task.description}</p>
+              <span className="time-taken-label"> Time Taken : </span> 
+              <h4> {task.timeTaken.hh} : {task.timeTaken.mm} : {task.timeTaken.ss} </h4>
             </div>
           ))} 
         </div>
@@ -145,13 +147,15 @@ function App() {
               <div className="modal-btns">
                 <button className="btn" onClick={(event) => {
                   event.preventDefault()
-                  let task = {
-                    title: formTitle,
-                    description: formDescription,
-                    timeTaken: liveStopWatch
+                  if(formTitle && formDescription){
+                    let task = {
+                      title: formTitle,
+                      description: formDescription,
+                      timeTaken: liveStopWatch
+                    }
+                    setTasks([...tasks, task])
+                    clearAndCloseModal()
                   }
-                  setTasks([...tasks, task])
-                  clearAndCloseModal()
                 }}>Save</button>
                 <button className="btn" onClick={() => {
                   clearAndCloseModal()
