@@ -108,25 +108,25 @@ function App() {
 
       {isModalOpen ? 
         <div className="modal">
-        <div className="modal-content">
-          <form action="">
-           
-            <label htmlFor=""></label>
-            <input type="text" />
-            
-            <label htmlFor=""></label>
-            <input type="text" />
+          <div className="modal-content">
+            <form action="">
+              
+              <label htmlFor="">Title</label>
+              <input type="text" />
+              
+              <label htmlFor="">Description</label>
+              <textarea name="" id="" cols="30" rows="10"></textarea>
 
-            <div className="modal-footer">
-              <button>Save</button>
-              <button onClick={() => {
-                setIsModalOpen(false)
-              }}>cancel</button>
-            </div>
-          
-          </form>
+              <div className="modal-btns">
+                <button className="btn">Save</button>
+                <button className="btn" onClick={() => {
+                  setIsModalOpen(false)
+                }}>cancel</button>
+              </div>
+            
+            </form>
+          </div>
         </div>
-      </div>
       : null}
     </>
   );

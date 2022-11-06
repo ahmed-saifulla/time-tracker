@@ -81,5 +81,40 @@ body {
 .modal-content{
   background-color: #17D4FE;
   width: 500px;
-  height: 500px;
+  padding: 16px;
+}
+
+.modal-content form{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.modal-content label{
+  margin-top: 16px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  background-color: #000;
+  color: #fff;
+}
+
+.modal-btns{
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-btns .btn{
+  margin: 8px; 
+  border: 4px solid #000;
+  background: #17D4FE;
+  color: #000;
+  cursor: pointer;
+}
+
+.modal-btns .btn:hover{
+  background: #000;
+  color: #17D4FE;
 }
