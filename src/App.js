@@ -88,13 +88,17 @@ function App() {
               setIsStart(true)
               setIsPause(false)
               updateStopWachTime()
-            }}>
+            }}
+            disabled={isStart}
+            >
               Start
             </button>
             <button className="btn" onClick={() => {
               setIsStart(false)
               setIsPause(true)
-            }}>Pause</button>
+            }}
+            disabled={isPause}>
+              Pause</button>
             <button className="btn" onClick={() => {
               setIsModalOpen(true)
             }}>Save</button>
@@ -110,16 +114,16 @@ function App() {
 
         
 
-        <div className="tasks">
+        <div className="tasks br-12">
           <div className="tasks-header">
-            <h5>Tasks</h5>
-            <button className="clear-tasks-btn" onClick={() => {
+            <h3>Tasks</h3>
+            <button className="clear-tasks-btn br-4" onClick={() => {
               setTasks([])
             }}>Clear</button>
           </div>
 
           {tasks.map((task, i) => (
-             <div key={i}  className="task"> 
+             <div key={i}  className="task br-8"> 
               <h6>{task.title}</h6>
               <p>{task.description}</p>
               <span className="time-taken-label"> Time Taken : </span> 
@@ -151,7 +155,7 @@ function App() {
                     let task = {
                       title: formTitle,
                       description: formDescription,
-                      timeTaken: liveStopWatch
+                      timeTaken: {...liveStopWatch}
                     }
                     setTasks([...tasks, task])
                     clearAndCloseModal()
