@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import Modal from './Modal';
+import Tasks from './Tasks';
 
 function App() {
 
@@ -110,25 +111,10 @@ function App() {
           </div>
         </div>
 
-        
+        <Tasks tasks={tasks} onClear={() => {
+          setTasks([])
+        }}/>
 
-        <div className="tasks br-12">
-          <div className="tasks-header">
-            <h3>Tasks</h3>
-            <button className="clear-tasks-btn br-4" onClick={() => {
-              setTasks([])
-            }}>Clear</button>
-          </div>
-
-          {tasks.map((task, i) => (
-             <div key={i}  className="task br-8"> 
-              <h6>{task?.title}</h6>
-              <p>{task?.description}</p>
-              <span className="time-taken-label"> Time Taken : </span> 
-              <h4> {task?.timeTaken.hh} : {task?.timeTaken.mm} : {task?.timeTaken.ss} </h4>
-            </div>
-          ))} 
-        </div>
       </div>
 
       {isModalOpen ? 
