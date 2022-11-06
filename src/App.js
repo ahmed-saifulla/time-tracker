@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import Modal from './Modal';
 
 function App() {
 
@@ -8,8 +9,6 @@ function App() {
   const [isPause, setIsPause] = useState(false)
   const [liveStopWatch, setLiveStopWatch] = useState({hh: 0 , mm: 0, ss: 0})
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [formTitle, setFormTitle] = useState("")
-  const [formDescription, setFormDescription] = useState("")
   const [tasks, setTasks] = useState([])
 
   const updateTime = () => {
@@ -46,11 +45,10 @@ function App() {
       setLiveStopWatch(tempLiveStopWatch)
   }
 
-  const clearAndCloseModal = () => {
-    setFormTitle("")
-    setFormDescription("")
-    setIsModalOpen(false)
-  }
+  // handle trigger
+  // const clearAndCloseModal = () => {
+    // setIsModalOpen(false)
+  // }
 
   useEffect(() => {
 
@@ -124,51 +122,25 @@ function App() {
 
           {tasks.map((task, i) => (
              <div key={i}  className="task br-8"> 
-              <h6>{task.title}</h6>
-              <p>{task.description}</p>
+              <h6>{task?.title}</h6>
+              <p>{task?.description}</p>
               <span className="time-taken-label"> Time Taken : </span> 
-              <h4> {task.timeTaken.hh} : {task.timeTaken.mm} : {task.timeTaken.ss} </h4>
+              <h4> {task?.timeTaken.hh} : {task?.timeTaken.mm} : {task?.timeTaken.ss} </h4>
             </div>
           ))} 
         </div>
       </div>
 
       {isModalOpen ? 
-        <div className="modal">
-          <div className="modal-content">
-            <form action="">
-              
-              <label htmlFor="">Title</label>
-              <input type="text" value={formTitle} onInput={(event) => {
-                setFormTitle(event.target.value)
-              }}/>
-              
-              <label htmlFor="">Description</label>
-              <textarea name="" id="" cols="30" rows="10" value={formDescription} onInput={(event) => {
-                setFormDescription(event.target.value)
-              }}></textarea>
-
-              <div className="modal-btns">
-                <button className="btn" onClick={(event) => {
-                  event.preventDefault()
-                  if(formTitle && formDescription){
-                    let task = {
-                      title: formTitle,
-                      description: formDescription,
-                      timeTaken: {...liveStopWatch}
-                    }
-                    setTasks([...tasks, task])
-                    clearAndCloseModal()
-                  }
-                }}>Save</button>
-                <button className="btn" onClick={() => {
-                  clearAndCloseModal()
-                }}>cancel</button>
-              </div>
-            
-            </form>
-          </div>
-        </div>
+        <Modal
+          liveStopWatch={liveStopWatch}
+          onCancel={() => {
+            setIsModalOpen(false)
+          }}
+          onSave={(task) => {
+            setTasks([...tasks, task])
+          }}
+        />
       : null}
     </>
   );
