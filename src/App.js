@@ -85,6 +85,13 @@ function App() {
             setIsPause(true)
           }}>Pause</button>
           <button className="btn">Save</button>
+          <button className="btn" onClick={() => {
+            setIsStart(false)
+            setIsPause(false)
+            setLiveStopWatch({hh: 0 , mm: 0, ss: 0})
+          }}>
+            Reset
+          </button>
         </div>
       </div>
 

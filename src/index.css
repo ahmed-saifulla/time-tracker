@@ -52,6 +52,12 @@ body {
   background: transparent;
   color: #17D4FE;
   width: 110px;
+  cursor: pointer;
+}
+
+.buttons .btn:hover{
+  background: #17D4FE;
+  color: #000;
 }
 
 .tasks{
