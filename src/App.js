@@ -8,6 +8,9 @@ function App() {
   const [isPause, setIsPause] = useState(false)
   const [liveStopWatch, setLiveStopWatch] = useState({hh: 0 , mm: 0, ss: 0})
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [formTitle, setFormTitle] = useState("")
+  const [formDescription, setFormDescription] = useState("")
+  const [tasks, setTasks] = useState([])
 
   const updateTime = () => {
     let liveDate = new Date()
@@ -41,6 +44,12 @@ function App() {
         tempLiveStopWatch.hh += 1
       }
       setLiveStopWatch(tempLiveStopWatch)
+  }
+
+  const clearAndCloseModal = () => {
+    setFormTitle("")
+    setFormDescription("")
+    setIsModalOpen(false)
   }
 
   useEffect(() => {
@@ -102,7 +111,19 @@ function App() {
         
 
         <div className="tasks">
-          Tasks Here 
+          <div className="tasks-header">
+            <h5>Tasks</h5>
+            <button className="clear-tasks-btn" onClick={() => {
+              setTasks([])
+            }}>Clear</button>
+          </div>
+
+          {tasks.map((task, i) => (
+             <div key={i}  className="task"> 
+              <h6>{task.title}</h6>
+              <p>{task.description}</p>
+            </div>
+          ))} 
         </div>
       </div>
 
@@ -112,15 +133,28 @@ function App() {
             <form action="">
               
               <label htmlFor="">Title</label>
-              <input type="text" />
+              <input type="text" value={formTitle} onInput={(event) => {
+                setFormTitle(event.target.value)
+              }}/>
               
               <label htmlFor="">Description</label>
-              <textarea name="" id="" cols="30" rows="10"></textarea>
+              <textarea name="" id="" cols="30" rows="10" value={formDescription} onInput={(event) => {
+                setFormDescription(event.target.value)
+              }}></textarea>
 
               <div className="modal-btns">
-                <button className="btn">Save</button>
+                <button className="btn" onClick={(event) => {
+                  event.preventDefault()
+                  let task = {
+                    title: formTitle,
+                    description: formDescription,
+                    timeTaken: liveStopWatch
+                  }
+                  setTasks([...tasks, task])
+                  clearAndCloseModal()
+                }}>Save</button>
                 <button className="btn" onClick={() => {
-                  setIsModalOpen(false)
+                  clearAndCloseModal()
                 }}>cancel</button>
               </div>
             
